@@ -23,7 +23,7 @@ module BeetrackAPI
         end
 
         def createroute(options = {})
-            get("routes", options)
+            post("routes", options)
         end
 
         def getdispatchinfo(dispatch_id)
@@ -41,7 +41,7 @@ module BeetrackAPI
         end
 
         def post(path, params ={})
-            res = Curl.post(@url + path, params) do |http|
+            res = Curl.post(@url + path, params.to_json) do |http|
                 http.headers['X-AUTH-TOKEN'] = @key
                 http.headers['Content-Type'] = 'application/json'
             end
