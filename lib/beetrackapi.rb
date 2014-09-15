@@ -30,6 +30,10 @@ module BeetrackAPI
             get("dispatches/#{dispatch_id}")
         end
 
+        def updateroute(route_id, options ={})
+            put("routes/#{route_id}", options)
+        end
+
         private
 
         def get(path, params = {})
@@ -45,7 +49,15 @@ module BeetrackAPI
                 http.headers['X-AUTH-TOKEN'] = @key
                 http.headers['Content-Type'] = 'application/json'
             end
-            JSON.parse(res.body_str)                
+            JSON.parse(res.body_str)
+        end
+
+        def put(path, params ={})
+            res = Curl.put(@url + path, params.to_json) do |http|
+                http.headers['X-AUTH-TOKEN'] = @key
+                http.headers['Content-Type'] = 'application/json'
+            end
+            JSON.parse(res.body_str)
         end
 
         def parse(http_response)

@@ -32,3 +32,8 @@ client.createroute(<route_id>, parameters (As seen in beetrack.in/external_api.h
 ```ruby
 client.getdispatchinfo(<dispatch_id>)
 ```
+
+###Update Route Information###
+```ruby
+client.updateroute(route_id, parameters (As seen in beetrack.in/external_api.html)))
+```
