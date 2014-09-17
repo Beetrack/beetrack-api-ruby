@@ -30,6 +30,10 @@ module BeetrackAPI
             get("dispatches/#{dispatch_id}")
         end
 
+        def gettrucks
+            get("trucks")
+        end
+
         def updateroute(route_id, options ={})
             put("routes/#{route_id}", options)
         end
