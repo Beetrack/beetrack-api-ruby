@@ -22,6 +22,10 @@ module BeetrackAPI
             get('routes', :date => date)
         end
 
+        def getroute(route_id)
+            get("routes/#{route_id}")
+        end
+
         def createroute(options = {})
             post("routes", options)
         end
