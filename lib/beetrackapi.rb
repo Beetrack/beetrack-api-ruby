@@ -2,6 +2,7 @@ require 'curb'
 require 'json'
 require 'cgi'
 require 'time'
+require 'rest_client'
 
 module BeetrackAPI
     
@@ -40,6 +41,21 @@ module BeetrackAPI
 
         def updateroute(route_id, options ={})
             put("routes/#{route_id}", options)
+        end
+
+        def upload_file(filename, content_type)
+          request = RestClient::Request.new(
+              :method => :post,
+              :url => "#{url}import",
+              :headers => {
+                'Content-Type' => content_type,
+                'X-AUTH-TOKEN' => @key
+                },
+              :payload => {
+                :multipart => true,
+                :file => File.new(filename, 'rb')
+              })
+          request.execute
         end
 
         private
