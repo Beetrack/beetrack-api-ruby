@@ -43,7 +43,7 @@ module BeetrackAPI
             put("routes/#{route_id}", options)
         end
 
-        def upload_file(filename, content_type)
+        def upload_file(file, content_type)
           request = RestClient::Request.new(
               :method => :post,
               :url => "#{url}import",
@@ -53,7 +53,7 @@ module BeetrackAPI
                 },
               :payload => {
                 :multipart => true,
-                :file => File.new(filename, 'rb')
+                :file => file
               })
           request.execute
         end
