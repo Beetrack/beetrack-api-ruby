@@ -15,7 +15,7 @@ module BeetrackAPI
 
         def initialize(options = {})
             @key = options[:key]
-            @url = options[:url] || 'http://app.beetrack.cl/api/external/v1/'
+            @url = options[:url] || 'https://app.beetrack.cl/api/external/v1/'
         end
 
         def getroutes(options = {})
@@ -54,7 +54,8 @@ module BeetrackAPI
               :payload => {
                 :multipart => true,
                 :file => file
-              })
+              },
+              ssl_version: 'TLSv1_2')
           request.execute
         end
 
