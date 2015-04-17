@@ -59,6 +59,14 @@ module BeetrackAPI
           request.execute
         end
 
+        def request_data_export(params = {})
+          post('data_exports', params)
+        end
+
+        def get_data_export_status(id)
+          get("data_exports/#{id}")
+        end
+
         private
 
         def get(path, params = {})
