@@ -5,13 +5,13 @@ require 'time'
 require 'rest_client'
 
 module BeetrackAPI
-    
+
     class Error < StandardError; end
     class AuthenticationError < Error; end
 
     class Client
         attr_accessor :key
-        attr_reader :url 
+        attr_reader :url
 
         def initialize(options = {})
             @key = options[:key]
@@ -70,27 +70,36 @@ module BeetrackAPI
         private
 
         def get(path, params = {})
-            res = Curl.get(@url + request_uri(path,params)) do |http|
-                http.headers['X-AUTH-TOKEN'] = @key
-                http.headers['Content-Type'] = 'application/json'
-            end
-            JSON.parse(res.body_str)
+          request = RestClient::Request.new(
+            :method => :get,
+            :url => @url + request_uri(path, params),
+            :headers => {
+              'Content-Type' => 'application/json',
+              'X-AUTH-TOKEN' => @key
+            },
+            ssl_version: 'TLSv1_2')
+          return JSON.parse(request.execute)
         end
 
         def post(path, params ={})
-            res = Curl.post(@url + path, params.to_json) do |http|
-                http.headers['X-AUTH-TOKEN'] = @key
-                http.headers['Content-Type'] = 'application/json'
-            end
-            JSON.parse(res.body_str)
+          JSON.parse(make_request(:post, path, params))
         end
 
         def put(path, params ={})
-            res = Curl.put(@url + path, params.to_json) do |http|
-                http.headers['X-AUTH-TOKEN'] = @key
-                http.headers['Content-Type'] = 'application/json'
-            end
-            JSON.parse(res.body_str)
+          JSON.parse(make_request(:put, path, params))
+        end
+
+        def make_request(method, path, params)
+          request = RestClient::Request.new(
+            :method => method,
+            :url => @url + path,
+            :payload => params.to_json,
+            :headers => {
+              'Content-Type' => 'application/json',
+              'X-AUTH-TOKEN' => @key
+            },
+            ssl_version: 'TLSv1_2')
+          return request.execute
         end
 
         def parse(http_response)
