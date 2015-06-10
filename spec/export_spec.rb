@@ -19,8 +19,7 @@ RSpec.describe BeetrackAPI::Client, "#client" do
       )
       params = {
         export_items: true,
-        date_start: Date.today.prev_day,
-        date_end: Date.today.prev_day
+        date: Date.today.prev_day
       }
       body = client.request_data_export(params)
 
