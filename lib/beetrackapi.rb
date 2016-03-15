@@ -18,34 +18,48 @@ module BeetrackAPI
             @url = @url + '/' if @url[-1] != '/'
         end
 
-        def getroutes(options = {})
+        def get_routes(options = {})
             date = options.empty? ? "#{Date.today.strftime("%d-%m-%Y")}" : options[:date]
             get('routes', :date => date)
         end
 
-        def getroute(route_id)
+        alias_method :getroutes, :get_routes
+
+        def get_route(route_id)
             get("routes/#{route_id}")
         end
 
-        def createroute(options = {})
+        alias_method :getroute, :get_route
+
+        def create_route(options = {})
             post("routes", options)
         end
 
-        def getdispatchinfo(dispatch_id)
+        alias_method :createroute, :create_route
+
+        def get_dispatch_info(dispatch_id)
             get("dispatches/#{dispatch_id}")
         end
 
-        def gettrucks
+        alias_method :getdispatchinfo, :get_dispatch_info
+
+        def get_trucks
             get("trucks")
         end
 
-        def gettruck(identifier)
+        alias_method :gettrucks, :get_trucks
+
+        def get_truck(identifier)
             get("trucks/#{identifier}")
         end
 
-        def updateroute(route_id, options ={})
+        alias_method :gettruck, :get_truck
+
+        def update_route(route_id, options ={})
             put("routes/#{route_id}", options)
         end
+
+        alias_method :updateroute, :update_route
 
         def upload_file(file, content_type)
           request = RestClient::Request.new(
