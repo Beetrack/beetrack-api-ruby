@@ -15,6 +15,7 @@ module BeetrackAPI
         def initialize(options = {})
             @key = options[:key]
             @url = options[:url] || 'https://app.beetrack.cl/api/external/v1/'
+            @url = @url + '/' if @url[-1] != '/'
         end
 
         def getroutes(options = {})
