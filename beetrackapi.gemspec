@@ -1,10 +1,10 @@
 Gem::Specification.new do |s|
   s.name = 'beetrackapi'
-  s.version = '0.5.1'
+  s.version = '0.6.0'
   s.platform = Gem::Platform::RUBY
-  s.authors = ['Nicolás Kipreos']
+  s.authors = ['Nicolás Kipreos', 'Jose Luis Honorato']
   s.email = ['nicolas.kipreos@beetrack.com']
-  s.homepage = 'http://github.com/nkipreos/'
+  s.homepage = 'https://github.com/Beetrack/beetrack-api-ruby'
   s.description = 'A Ruby Wrapper for the Beetrack API'
   s.summary = 'See description'
   s.files = Dir.glob('{lib}/**/*') + %w(README.md beetrackapi.gemspec)
