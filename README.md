@@ -20,20 +20,25 @@ client = BeetrackAPI::Client.new(:key => <your_api_key>)
 
 ###Get Routes###
 ```ruby
-client.getroutes(:date => 'dd-mm-yyyy'(Optional))
+client.get_routes(:date => 'dd-mm-yyyy'(Optional))
 ```
 
 ###Create Routes###
 ```ruby
-client.createroute(<route_id>, parameters (As seen in beetrack.in/external_api.html))
+client.create_route(<route_id>, parameters)
 ```
 
 ###Get Dispatch Information###
 ```ruby
-client.getdispatchinfo(<dispatch_id>)
+client.get_dispatch_info(<dispatch_id>)
 ```
 
 ###Update Route Information###
 ```ruby
-client.updateroute(route_id, parameters (As seen in beetrack.in/external_api.html)))
+client.update_route(route_id, parameters)
 ```
+
+
+## Documentation
+
+Please check the API's documentation in https://beetrack.com/apidoc
